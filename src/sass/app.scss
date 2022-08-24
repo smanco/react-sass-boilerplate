@@ -1,0 +1,25 @@
+@import url(./_variables.scss);
+@import url(./_elements.scss);
+
+.container {
+    height: 100vh;
+    background-color: #e7e3eb;
+    .header {
+        padding: 15px 20px;
+        background-color: #6200ee;
+        h1 {
+            color: #fff;
+        }
+    }
+
+    .react-logo {
+        background: url('./assets/images/react-logo.png') no-repeat center;
+        height: 500px;
+        width: 500px;
+        background-size: contain;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

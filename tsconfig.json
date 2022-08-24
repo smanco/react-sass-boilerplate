@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "outDir": "dist",
+        "allowSyntheticDefaultImports": true,
+        "jsx": "react",
+        "strictNullChecks": true,
+        "allowJs": true,
+        "target": "ES6",
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "esModuleInterop": true,
+        "paths": {
+            "@styles/*": ["./src/styles/*"],
+            "@ui/*": ["./src/layout/ui/*"],
+            "@pages/*": ["./src/layout/pages/*"],
+            "@components/*": ["./src/layout/components/*"],
+            "@store/*": ["./src/state/store/*"],
+            "@sb/*": ["./src/sb/*"]
+        }
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "public"]
+}
