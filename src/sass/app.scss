@@ -1,5 +1,5 @@
-@import url(./_variables.scss);
-@import url(./_elements.scss);
+@import './_variables';
+@import './_elements';
 
 .container {
     height: 100vh;
