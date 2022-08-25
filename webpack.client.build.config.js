@@ -4,12 +4,15 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const buildDirectory = 'dist';
+const pkJson = require('./package.json');
+
 module.exports = {
     mode: 'production',
     entry: './src/index.tsx',
     output: {
         path: path.join(__dirname, buildDirectory),
-        filename: 'bundle.js',
+        filename: 'js/[name]_' + pkJson.version + '.min.js',
+        assetModuleFilename: 'images/[hash][ext][query]',
     },
     resolve: {
         extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
@@ -34,6 +37,15 @@ module.exports = {
                 exclude: ['/node_modules/'],
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
+            {
+                test: /\.(woff|woff2|eot|ttf|svg|png|jpg|gif)$/i,
+                type: 'asset',
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 8192,
+                    },
+                },
+            },
         ],
     },
     plugins: [
@@ -41,8 +53,8 @@ module.exports = {
             cleanOnceBeforeBuildPatterns: [path.join(__dirname, buildDirectory)],
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].css',
-            chunkFilename: '[id].css',
+            filename: 'css/[name]_' + pkJson.version + '.min.css',
+            chunkFilename: 'css/[id]_' + pkJson.version + '.min.css',
         }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
