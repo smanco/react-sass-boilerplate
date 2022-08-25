@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -54,6 +55,9 @@ module.exports = {
         historyApiFallback: true,
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': JSON.stringify(process.env),
+        }),
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: [path.join(__dirname, buildDirectory)],
         }),
