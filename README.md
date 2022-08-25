@@ -1,1 +1,1 @@
-# todo-react-sass
+# react-sass-boilerplate
