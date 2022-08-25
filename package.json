@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "Todo app",
     "main": "index.tsx",
-    "repository": "https://github.com/smanco/todo-react-sass.git",
+    "repository": "https://github.com/smanco/react-sass-boilerplate.git",
     "author": "Dino Manco <mancosanto@gmail.com>",
     "license": "MIT",
     "scripts": {
