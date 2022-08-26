@@ -34,7 +34,16 @@ module.exports = {
             {
                 test: /\.(s(a|c)ss)$/,
                 exclude: ['/node_modules/'],
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            additionalData: '@import "./themes/' + process.env.SKIN + '/_variables";',
+                        },
+                    },
+                ],
             },
             {
                 test: /\.(woff|woff2|eot|ttf|svg|png|jpg|gif)$/i,
