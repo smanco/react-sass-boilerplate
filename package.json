@@ -1,0 +1,49 @@
+{
+    "name": "react-sass-boilerplate",
+    "version": "0.0.1",
+    "description": "React Sass boilerplate",
+    "main": "index.tsx",
+    "repository": "https://github.com/smanco/react-sass-boilerplate.git",
+    "author": "Dino Manco <mancosanto@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "start-light": "env-cmd -r ./.env-cmdrc.js -e light,commons webpack-dev-server  --devtool inline-source-map --hot --config webpack.config.js",
+        "start-dark": "env-cmd -r ./.env-cmdrc.js -e dark,commons webpack-dev-server --devtool inline-source-map --hot --config webpack.config.js",
+        "build-light": "env-cmd -r ./.env-cmdrc.js -e light,commons webpack --config webpack.config.prod.js",
+        "build-dark": "env-cmd -r ./.env-cmdrc.js -e dark,commons webpack --config webpack.config.prod.js",
+        "stats": "webpack --profile --json --config webpack.build.config.js > stats.json",
+        "analyze": "webpack-bundle-analyzer stats.json",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.3.0",
+        "zustand": "^4.1.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.18.13",
+        "@babel/preset-env": "^7.18.10",
+        "@babel/preset-react": "^7.18.6",
+        "babel-loader": "^8.2.5",
+        "clean-webpack-plugin": "^4.0.0",
+        "copy-webpack-plugin": "^11.0.0",
+        "css-loader": "^6.7.1",
+        "env-cmd": "^10.1.0",
+        "file-loader": "^6.2.0",
+        "html-webpack-plugin": "^5.5.0",
+        "mini-css-extract-plugin": "^2.6.1",
+        "node-sass": "^7.0.1",
+        "parallel-webpack": "^2.6.0",
+        "react-scripts": "^5.0.1",
+        "sass": "^1.54.5",
+        "sass-loader": "^13.0.2",
+        "style-loader": "^3.3.1",
+        "ts-loader": "^9.3.1",
+        "typescript": "^4.7.4",
+        "url-loader": "^4.1.1",
+        "webpack": "^5.74.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-dev-server": "^4.10.0"
+    }
+}
