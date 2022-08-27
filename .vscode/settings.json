@@ -2,5 +2,5 @@
     "liveServer.settings.port": 5500,
     "liveServer.settings.root": "/dist/",
     "liveServer.settings.NoBrowser": false,
-    "cSpell.words": ["cmdrc"]
+    "cSpell.words": ["cmdrc", "pathinfo"]
 }

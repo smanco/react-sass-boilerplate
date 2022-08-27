@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const buildDirectory = 'dist';
@@ -10,8 +11,10 @@ module.exports = {
     devtool: 'eval-source-map',
     output: {
         path: path.join(__dirname, buildDirectory),
-        filename: 'bundle.js',
-        assetModuleFilename: 'images/[hash][ext][query]',
+        filename: './assets/js/[name].min.js',
+        chunkFilename: './assets/js/[name].min.js',
+        assetModuleFilename: './assets/images/css/[name][ext][query]',
+        pathinfo: false,
     },
     resolve: {
         extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
@@ -56,6 +59,12 @@ module.exports = {
             },
         ],
     },
+    stats: {
+        all: false,
+        errors: true,
+        moduleTrace: true,
+        errorDetails: true,
+    },
     devServer: {
         port: 3001,
         open: true,
@@ -64,11 +73,26 @@ module.exports = {
         historyApiFallback: true,
     },
     plugins: [
+        new webpack.ProvidePlugin({
+            React: 'react',
+        }),
         new webpack.DefinePlugin({
             'process.env': JSON.stringify(process.env),
         }),
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: [path.join(__dirname, buildDirectory)],
+        }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.join(__dirname, 'src' + process.env.THEME_IMAGES_PATH) + process.env.SKIN,
+                    to: path.join(__dirname, buildDirectory + process.env.THEME_IMAGES_PATH),
+                },
+                {
+                    from: path.join(__dirname, 'src' + process.env.COMMON_IMAGES_PATH),
+                    to: path.join(__dirname, buildDirectory + process.env.COMMON_IMAGES_PATH),
+                },
+            ],
         }),
         new HtmlWebpackPlugin({
             template: './public/index.html',

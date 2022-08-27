@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -12,8 +13,9 @@ module.exports = {
     entry: './src/index.tsx',
     output: {
         path: path.join(__dirname, buildDirectory),
-        filename: 'js/[name]_' + pkJson.version + '.min.js',
-        assetModuleFilename: 'images/[hash][ext][query]',
+        filename: './assets/js/[name]_' + pkJson.version + '.min.js',
+        chunkFilename: './assets/js/[name].min.js',
+        assetModuleFilename: './assets/images/css/[name][ext][query]',
     },
     resolve: {
         extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
@@ -58,6 +60,7 @@ module.exports = {
             },
         ],
     },
+    stats: 'errors-only',
     plugins: [
         new webpack.DefinePlugin({
             'process.env': JSON.stringify(process.env),
@@ -66,8 +69,20 @@ module.exports = {
             cleanOnceBeforeBuildPatterns: [path.join(__dirname, buildDirectory)],
         }),
         new MiniCssExtractPlugin({
-            filename: 'css/[name]_' + pkJson.version + '.min.css',
-            chunkFilename: 'css/[id]_' + pkJson.version + '.min.css',
+            filename: 'assets/css/[name]_' + pkJson.version + '.min.css',
+            chunkFilename: 'assets/css/[id]_' + pkJson.version + '.min.css',
+        }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.join(__dirname, 'src' + process.env.THEME_IMAGES_PATH) + process.env.SKIN,
+                    to: path.join(__dirname, buildDirectory + process.env.THEME_IMAGES_PATH),
+                },
+                {
+                    from: path.join(__dirname, 'src' + process.env.COMMON_IMAGES_PATH),
+                    to: path.join(__dirname, buildDirectory + process.env.COMMON_IMAGES_PATH),
+                },
+            ],
         }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
